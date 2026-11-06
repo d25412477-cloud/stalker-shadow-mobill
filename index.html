@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STALKER Shadow Mobile</title>
+
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #111;
+    color: white;
+    font-family: Arial;
+}
+
+#game {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(#53604c, #222b20, #101410);
+    position: relative;
+}
+
+#hud {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 14px;
+    text-shadow: 2px 2px black;
+}
+
+#player {
+    position: absolute;
+    width: 45px;
+    height: 65px;
+    background: #777;
+    border: 2px solid #333;
+    border-radius: 10px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#controls {
+    position: absolute;
+    bottom: 25px;
+    left: 20px;
+    display: grid;
+    grid-template-columns: 60px 60px 60px;
+    gap: 5px;
+}
+
+button {
+    background: #333;
+    color: white;
+    border: 2px solid #777;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 20px;
+}
+
+#right {
+    position: absolute;
+    bottom: 35px;
+    right: 20px;
+}
+
+#message {
+    position: absolute;
+    bottom: 140px;
+    left: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="game">
+
+<div id="hud">
+STALKER SHADOW MOBILE<br>
+Здоровье: <span id="health">100</span><br>
+Патроны: 30
+</div>
+
+<div id="player"></div>
+
+<div id="message">
+Добро пожаловать в Зону!
+</div>
+
+<div id="controls">
+<button onclick="move(0,-1)">↑</button>
+<button onclick="move(0,1)">↓</button>
+<button onclick="move(-1,0)">←</button>
+<button onclick="move(1,0)">→</button>
+</div>
+
+<button id="right" onclick="shoot()">🔫</button>
+
+</div>
+
+<script>
+let x = 50;
+let y = 50;
+let ammo = 30;
+
+function move(dx,dy) {
+    x += dx * 3;
+    y += dy * 3;
+
+    x = Math.max(5, Math.min(95,x));
+    y = Math.max(5, Math.min(95,y));
+
+    document.getElementById("player").style.left = x + "%";
+    document.getElementById("player").style.top = y + "%";
+}
+
+function shoot() {
+    if(ammo > 0) {
+        ammo--;
+        document.getElementById("message").innerText =
+        "Выстрел! Осталось патронов: " + ammo;
+    } else {
+        document.getElementById("message").innerText =
+        "Нет патронов!";
+    }
+}
+</script>
+
+</body>
+</html>
